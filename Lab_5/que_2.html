@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Current Date and Time</title>
+</head>
+<body>
+
+<h2>Current Date and Time</h2>
+<p id="datetime"></p>
+
+<script>
+// Create Date object
+let today = new Date("July 18, 2005 10:30:45");
+
+// Arrays for day and month names
+let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+let months = ["January", "February", "March", "April", "May", "June",
+              "July", "August", "September", "October", "November", "December"];
+
+// Extract date components
+let dayName = days[today.getDay()];
+let monthName = months[today.getMonth()];
+let date = today.getDate();
+let year = today.getFullYear();
+
+
+// Extract time components
+let hours = today.getHours();
+let minutes = today.getMinutes();
+let seconds = today.getSeconds();
+
+// Convert to 12-hour format
+let ampm = "AM";
+if (hours >= 12) {
+    ampm = "PM";
+}
+hours = hours % 12;
+if (hours == 0) {
+    hours = 12;
+}
+
+// Add leading zero if needed
+if (minutes < 10) {
+    minutes = "0" + minutes;
+}
+if (seconds < 10) {
+    seconds = "0" + seconds;
+}
+
+// Display formatted output
+document.getElementById("datetime").innerHTML =
+"Today is " + dayName + ", " + monthName + " " + date + ", " + year +
+", and the time is " + hours + ":" + minutes + ":" + seconds + " " + ampm + ".";
+</script>
+
+</body>
+</html>

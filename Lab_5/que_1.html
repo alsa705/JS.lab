@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cookie Example</title>
+</head>
+<body>
+
+<h2>Cookie Demonstration</h2>
+<p id="message"></p>
+
+<script>
+// Function to set a cookie
+function setCookie(cname, cvalue, exdays) {
+    let d = new Date();
+    d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+    let expires = "expires=" + d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+// Function to get a cookie
+function getCookie(cname) {
+    let name = cname + "=";
+    let decodedCookie = decodeURIComponent(document.cookie);
+    let cookies = decodedCookie.split(';');
+
+    for (let i = 0; i < cookies.length; i++) {
+        let c = cookies[i].trim();
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+
+// Check if cookie exists
+let username = getCookie("username");
+
+if (username != "") {
+    document.getElementById("message").innerHTML =
+        "Welcome back, " + username + "!";
+} else {
+    username = prompt("Please enter your name:");
+    if (username != "" && username != null) {
+        setCookie("username", username, 30);
+        document.getElementById("message").innerHTML =
+            "Hello, " + username + "! Your name has been saved in a cookie.";
+    }
+}
+</script>
+
+</body>
+</html>
